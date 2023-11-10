@@ -1,21 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:my_webapp/pages/adaptive/fullscreen_view.dart';
-import 'package:my_webapp/pages/adaptive/little_view.dart';
-import 'package:my_webapp/pages/adaptive/mobile_view.dart';
-
-import '../adaptive/constructor.dart';
+import '../../widgets/adaptive.dart';
+import '../../widgets/my_page.dart';
+import 'desktop/home_page_desktop.dart';
+import 'mobile/android_home_mobile.dart';
+import 'mobile/ios_home.dart';
 
 class HomePage extends StatelessWidget {
+  static const String routeName = '/';
+  static Route route() {
+    return MaterialPageRoute(
+        settings: const RouteSettings(name: routeName),
+        builder: (context) => const HomePage());
+  }
+
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const WindowConstructor(
-      full: HomePageFull(),
-      little: HomePageLittle(),
-      mobile: HomePageMobile(),
+      desktop: HomePageDesktop(),
+      planshet: HomePageDesktop(),
+      mobile: MyWrapPlatformPage(
+        android: HomePageByAndroid(),
+        ios: HomePageByIos(),
+      ),
     );
   }
 }
-
-
